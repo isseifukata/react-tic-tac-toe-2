@@ -33,15 +33,15 @@ const Board = () => {
 
   return (
     <BoardContainer>
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
+      <Cell data-cell="1" />
+      <Cell data-cell="2" />
+      <Cell data-cell="3" />
+      <Cell data-cell="4" />
+      <Cell data-cell="5" />
+      <Cell data-cell="6" />
+      <Cell data-cell="7" />
+      <Cell data-cell="8" />
+      <Cell data-cell="9" />
     </BoardContainer>
   )
 }

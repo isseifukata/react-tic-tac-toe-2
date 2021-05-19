@@ -6,6 +6,28 @@ import Board from './components/Board';
 import Status from './components/Status';
 
 const App = () => {
+  const [currentTurn, setCurrentTurn] = useState('first');
+  const [tableArray, settableArray] = useState(new Array(9).fill(null));
+  const victoryList = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 5, 9],
+    [3, 5, 7]
+  ];
+
+  const changeTurn = currentTurn => {
+    if (currentTurn === 'first') {
+      return 'second';
+    }
+    if (currentTurn === 'second') {
+      return 'first';
+    }
+  }
+
   const Wrapper = styled.main`
     height: 100vh;
     display: flex;
@@ -35,7 +57,7 @@ const App = () => {
         <Inner>
           <Title>TIC TAC TOE</Title>
           <Player />
-          <Board />
+          <Board  />
           <Status />
         </Inner>
       </Wrapper>
