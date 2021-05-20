@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Board = () => {
+const Board = props => {
 
   const BoardContainer = styled.div`
     display: grid;
@@ -33,15 +33,15 @@ const Board = () => {
 
   return (
     <BoardContainer>
-      <Cell data-cell="1" />
-      <Cell data-cell="2" />
-      <Cell data-cell="3" />
-      <Cell data-cell="4" />
-      <Cell data-cell="5" />
-      <Cell data-cell="6" />
-      <Cell data-cell="7" />
-      <Cell data-cell="8" />
-      <Cell data-cell="9" />
+      <Cell onClick={props.changeTurn()} data-cell="1" />
+      <Cell onClick={props.changeTurn()} data-cell="2" />
+      <Cell onClick={props.changeTurn()} data-cell="3" />
+      <Cell onClick={props.changeTurn()} data-cell="4" />
+      <Cell onClick={props.changeTurn()} data-cell="5" />
+      <Cell onClick={props.changeTurn()} data-cell="6" />
+      <Cell onClick={props.changeTurn()} data-cell="7" />
+      <Cell onClick={props.changeTurn()} data-cell="8" />
+      <Cell onClick={props.changeTurn()} data-cell="9" />
     </BoardContainer>
   )
 }
