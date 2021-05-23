@@ -65,9 +65,12 @@ const App = () => {
   const victoryOrDefeatCheck = (tableArray) => {
     let victoryPlayer = null;
     victoryList.forEach((victoryListItem) => {
-      const marker1 = tableArray[victoryListItem[0]];
-      const marker2 = tableArray[victoryListItem[1]];
-      const marker3 = tableArray[victoryListItem[2]];
+      const [marker1, marker2, marker3] = [
+        tableArray[victoryListItem[0]],
+        tableArray[victoryListItem[1]],
+        tableArray[victoryListItem[2]],
+      ];
+
       if (marker1 === marker2 && marker2 === marker3 && marker1 !== null) {
         victoryPlayer = marker1;
       }
@@ -76,10 +79,12 @@ const App = () => {
   };
 
   // 引き分け判定
-  const checkDraw = (tableArray) => {
-    let isDraw = false;
-    isDraw = !tableArray.some((value) => value === null);
-    if (isDraw) {
+  const checkDraw = (tableArray, victoryPlayer) => {
+    if (victoryPlayer !== null) {
+      return;
+    }
+    const allCellMarked = !tableArray.some((value) => value === null);
+    if (victoryPlayer === null && allCellMarked) {
       setVictoryPlayer("draw");
     }
   };
@@ -91,8 +96,11 @@ const App = () => {
 
   useEffect(() => {
     victoryOrDefeatCheck(tableArray);
-    checkDraw(tableArray);
   }, [tableArray]);
+
+  useEffect(() => {
+    checkDraw(tableArray, victoryPlayer);
+  }, [tableArray, victoryPlayer]);
 
   return (
     <>
