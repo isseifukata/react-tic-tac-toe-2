@@ -29,20 +29,32 @@ const Cell = styled.button`
     opacity: 0.6;
     cursor: pointer;
   }
+  &[disabled] {
+    cursor: not-allowed;
+    color: ${({ marker }) =>
+      marker === "O" ? "rgb(4, 120, 87)" : "rgb(124, 58, 237)"};
+  }
 `;
 
 const Board = (props) => {
   return (
     <BoardContainer>
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="1" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="2" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="3" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="4" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="5" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="6" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="7" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="8" />
-      <Cell onClick={() => props.onClick(props.currentTurn)} data-cell="9" />
+      {props.tableArray.map((element, index) => {
+        return (
+          <Cell
+            onClick={() =>
+              props.onClick(props.tableArray, props.isFirstTurn, index)
+            }
+            disabled={
+              props.tableArray[index] !== null || props.victoryPlayer !== null
+            }
+            marker={props.tableArray[index]}
+            key={index}
+          >
+            {props.tableArray[index]}
+          </Cell>
+        );
+      })}
     </BoardContainer>
   );
 };
