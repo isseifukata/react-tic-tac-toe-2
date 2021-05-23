@@ -21,6 +21,24 @@ const Wrapper = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  &:after {
+    z-index: -1;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(4, 120, 87, 0.3) 50%,
+      rgba(124, 58, 237, 0.3) 50%
+    );
+    transition: 0.2s ease-out;
+    top: 0;
+    left: ${({ isFirstTurn }) => (isFirstTurn ? "0" : "-100%")};
+  }
 `;
 
 const Inner = styled.div`
@@ -47,6 +65,7 @@ const App = () => {
   const reset = () => {
     setIsFirstTurn(true);
     setTableArray(new Array(9).fill(null));
+    setVictoryPlayer(null);
   };
 
   // 次のターンに移る
@@ -73,9 +92,9 @@ const App = () => {
 
       if (marker1 === marker2 && marker2 === marker3 && marker1 !== null) {
         victoryPlayer = marker1;
+        setVictoryPlayer(victoryPlayer);
       }
     });
-    setVictoryPlayer(victoryPlayer);
   };
 
   // 引き分け判定
@@ -95,17 +114,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    victoryOrDefeatCheck(tableArray);
-  }, [tableArray]);
-
-  useEffect(() => {
     checkDraw(tableArray, victoryPlayer);
   }, [tableArray, victoryPlayer]);
+
+  useEffect(() => {
+    victoryOrDefeatCheck(tableArray);
+  }, [tableArray]);
 
   return (
     <>
       <GlobalStyle />
-      <Wrapper>
+      <Wrapper isFirstTurn={isFirstTurn}>
         <Inner>
           <Title>TIC TAC TOE</Title>
           <Player isFirstTurn={isFirstTurn} />

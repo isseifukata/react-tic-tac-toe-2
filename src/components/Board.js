@@ -31,10 +31,26 @@ const Cell = styled.button`
   }
   &[disabled] {
     cursor: not-allowed;
-    color: ${({ marker }) =>
-      marker === "O" ? "rgb(4, 120, 87)" : "rgb(124, 58, 237)"};
+    color: rgb(255, 255, 255);
+    ${({marker}) => cellBgColor(marker)};
   }
 `;
+
+const cellBgColor = (marker) => {
+  if (marker === "O") {
+    return `
+    background-color: rgb(4, 120, 87);
+    `;
+  } else if (marker === "X") {
+    return `
+    background-color: rgb(124, 58, 237);
+    `;
+  } else {
+    return `
+    background-color: rgb(107, 114, 128);
+    `;
+  }
+};
 
 const Board = (props) => {
   return (
