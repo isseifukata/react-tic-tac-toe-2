@@ -29,17 +29,17 @@ const RestartButton = styled.button`
   }
 `;
 
-const Status = (props) => {
-  const showStatus = (victoryPlayer) => {
-    if (victoryPlayer === null) {
-      return "starting...";
-    } else if (victoryPlayer === "draw") {
-      return `Draw`;
-    } else {
-      return `${victoryPlayer} is Win`;
-    }
-  };
+const showStatus = (victoryPlayer) => {
+  if (victoryPlayer === null) {
+    return "starting...";
+  } else if (victoryPlayer === "draw") {
+    return `Draw`;
+  } else {
+    return `${victoryPlayer} is Win`;
+  }
+};
 
+const Status = (props) => {
   return (
     <StatusContainer>
       <Message>{showStatus(props.victoryPlayer)}</Message>
