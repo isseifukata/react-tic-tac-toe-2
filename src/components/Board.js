@@ -32,7 +32,7 @@ const Cell = styled.button`
   &[disabled] {
     cursor: not-allowed;
     color: rgb(255, 255, 255);
-    ${({marker}) => cellBgColor(marker)};
+    ${({ marker }) => cellBgColor(marker)};
   }
 `;
 
@@ -59,11 +59,14 @@ const Board = (props) => {
         return (
           <Cell
             onClick={() =>
-              props.onClick(props.tableArray, props.isFirstTurn, index, props.victoryPlayer)
+              props.onClick(
+                props.tableArray,
+                props.isFirstTurn,
+                index,
+                props.victoryPlayer
+              )
             }
-            disabled={
-              props.tableArray[index] !== null || props.victoryPlayer !== null
-            }
+            disabled={props.tableArray[index] && props.victoryPlayer}
             marker={props.tableArray[index]}
             key={index}
           >
