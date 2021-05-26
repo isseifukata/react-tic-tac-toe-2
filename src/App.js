@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Player from "./components/Player";
@@ -75,9 +75,9 @@ const App = () => {
 
   // 配列にマーカーを追加
   const addMarker = (tableArray, isFirstTurn, index) => {
-    const tmpArray = tableArray.slice();
-    tmpArray[index] = isFirstTurn ? "O" : "X";
-    setTableArray(tmpArray);
+    const newArray = tableArray.slice();
+    newArray[index] = isFirstTurn ? "O" : "X";
+    return newArray;
   };
 
   // 勝敗チェック
@@ -108,18 +108,13 @@ const App = () => {
     }
   };
 
-  const onClick = (tableArray, isFirstTurn, index) => {
-    addMarker(tableArray, isFirstTurn, index);
+  const onClick = (tableArray, isFirstTurn, index, victoryPlayer) => {
+    const newTableArray = addMarker(tableArray, isFirstTurn, index);
+    setTableArray(newTableArray);
     changeTurn(isFirstTurn);
+    victoryOrDefeatCheck(newTableArray);
+    checkDraw(newTableArray, victoryPlayer);
   };
-
-  useEffect(() => {
-    checkDraw(tableArray, victoryPlayer);
-  }, [tableArray, victoryPlayer]);
-
-  useEffect(() => {
-    victoryOrDefeatCheck(tableArray);
-  }, [tableArray]);
 
   return (
     <>

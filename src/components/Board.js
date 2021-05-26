@@ -59,7 +59,7 @@ const Board = (props) => {
         return (
           <Cell
             onClick={() =>
-              props.onClick(props.tableArray, props.isFirstTurn, index)
+              props.onClick(props.tableArray, props.isFirstTurn, index, props.victoryPlayer)
             }
             disabled={
               props.tableArray[index] !== null || props.victoryPlayer !== null
