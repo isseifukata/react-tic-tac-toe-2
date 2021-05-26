@@ -56,6 +56,7 @@ const Board = (props) => {
   return (
     <BoardContainer>
       {props.tableArray.map((element, index) => {
+        const marker = props.tableArray[index];
         return (
           <Cell
             onClick={() =>
@@ -66,11 +67,11 @@ const Board = (props) => {
                 props.victoryPlayer
               )
             }
-            disabled={props.tableArray[index] && props.victoryPlayer}
-            marker={props.tableArray[index]}
+            disabled={marker || props.victoryPlayer}
+            marker={marker}
             key={index}
           >
-            {props.tableArray[index]}
+            {marker}
           </Cell>
         );
       })}
